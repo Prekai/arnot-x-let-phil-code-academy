@@ -327,6 +327,28 @@ console.log("\n--- Task 5: Coercion Surprises ---");
 console.log("\n--- Task 6: Explicit Conversion ---");
 // your code here
 
+//a
+const ageNum = Number(user.age);
+console.log(ageNum, typeof (ageNum));
+
+//b
+const birthYear = 2025 - ageNum;
+console.log(`Born approximately: ${birthYear}`);
+
+//c
+const bad = Number("twenty-eight");
+console.log(bad);
+console.log(`Is NaN: ${isNaN(bad)}`);
+
+//d
+const messy = "42px solid #333";
+const px = parseInt(messy,);
+console.log(px); //42 find the first integer, only find the 42 because this is the start of the string if it would start with a char, it would give NaN
+
+//e
+const premiumStr = String(user.isPremium);
+console.log(premiumStr, typeof(premiumStr));
+
 // ============================================================
 // PART 5 — NULL, UNDEFINED, AND TRUTHINESS
 // ============================================================
@@ -362,6 +384,27 @@ console.log("\n--- Task 6: Explicit Conversion ---");
 
 console.log("\n--- Task 7: Falsy/Truthy ---");
 // your code here
+
+//a
+console.log(user.score, user.lastLogin); //score has been declared as null, lastLogin is not declared yet because the user never entered to the site
+
+//b
+user.score === (false || 0 || "" || null || undefined || NaN) ? console.log("score is truthy") : console.log("score is falsy");
+user.lastLogin === (false || 0 || "" || null || undefined || NaN) ? console.log("score is truthy") : console.log("score is falsy");
+
+//c
+console.log(`Boolean(false) = ${Boolean(false)}`);
+console.log(`Boolean(0) = ${Boolean(0)}`);
+console.log(`Boolean("") = ${Boolean("")}`);
+console.log(`Boolean(null) = ${Boolean(null)}`);
+console.log(`Boolean(undefined) = ${Boolean(undefined)}`);
+console.log(`Boolean(NaN) = ${Boolean(NaN)}`);
+
+//d
+console.log(`Boolean("0") = ${Boolean("0")}`);
+console.log(`Boolean("false") = ${Boolean("false")}`);
+console.log(`Boolean([]) = ${Boolean([])}`);
+console.log(`Boolean(()) = ${Boolean({})}`);
 
 // ============================================================
 // PART 6 — == vs ===
