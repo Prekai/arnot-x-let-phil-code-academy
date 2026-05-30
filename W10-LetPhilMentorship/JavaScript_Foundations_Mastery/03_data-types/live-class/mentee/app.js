@@ -110,7 +110,7 @@ console.log("--- Task 1: typeof ---");
 // TASK 2 — Your first template literals
 // Rewrite each of the following using template literals.
 
-const { firstName, lastName, email, isPremium, age } = user;
+const { firstName, lastName, email, isPremium, age, bio, score, lastLogin } = user;
 
 // console.log(userTwo.firstNameTwo);
 //
@@ -440,6 +440,12 @@ console.log(`Boolean(()) = ${Boolean({})}`);
 console.log("\n--- Task 8: == vs === ---");
 // your code here
 
+console.log(1=="1" , 1 === "1"); // a, true the values are converted to 1 so they are equal, false because a string is not equal with an integer
+console.log(0 == false , 0 === false); // b, true false turned to 0 so they are equal,  false because boolean is not equal with an integer
+console.log("" == false , "" === false); // c, true because falsy equals false, false because a falsy is not false
+console.log( null == undefined , null === undefined); // true, the only valid use of == (both value can be checked in a condition), false the values are not equal
+console.log(null == 0 , null === 0); //false, false because the two values are not equal
+
 // ============================================================
 // PART 7 — PUTTING IT TOGETHER: PROFILE FORMATTER
 // ============================================================
@@ -464,13 +470,29 @@ console.log("\n--- Task 8: == vs === ---");
 //   - Template literals for all string building
 //   - .trim(), .toLowerCase() for email cleaning
 //   - Number() for age conversion
-//   - Ternary or || for null/undefined fallbacks
-//
-// Call formatProfile(user) and log the result.
+//      
 
-console.log("\n--- Task 9: formatProfile ---");
-// your code here
+function formatProfile(firstName, lastName, email, age, bio, isPremium, score, lastLogin){
+  
+  let localTrimmedEmail = email.trim();
+  let formattedEmail = localTrimmedEmail.toLowerCase();
+  let localAge = Number(age);
+  let status = isPremium === true ? "⭐ Premium"  :  "Free";
+  let localBio = bio.trim();
+  let localScore = score === null ? "Not yet set" : score;
+  let localLastLogin = lastLogin === undefined ? "No logins yet" : lastLogin;
 
+  return console.log(
+    `=== [INITIALS] - [${firstName, lastName}] ===
+    Email: ${formattedEmail}
+    Age: ${localAge}
+    Status: ${status}
+    Bio: ${localBio}
+    Score: ${localScore}
+    Activity ${localLastLogin}`);
+   }
+
+console.log(formatProfile(firstName, lastName, email, age, bio, isPremium, score, lastLogin));
 // ============================================================
 // PART 8 — CONNECT THE DOTS
 // ============================================================
@@ -501,6 +523,22 @@ console.log("\n--- Task 9: formatProfile ---");
 console.log("\n--- Task 10: Rewriting with Template Literals ---");
 // your code here
 
+//a
+let messageCount = 5;
+console.log(`Hello ${firstName}! You have ${messageCount} messages`);
+
+//b
+let access = age >= 20 ? "granted" : "denied";
+console.log(`Access ${access} for ${username}`);
+
+//c
+const products = ["Headphones", "Keyboard", "Hub"];
+let result = "";
+for (let i = 0; i <=2; i++) {
+  result += `Item ${products[i]} :product\n`;
+}
+
+console.log(result);
 // ============================================================
 // 📝 FOOTNOTES
 // ============================================================
