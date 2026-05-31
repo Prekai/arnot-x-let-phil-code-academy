@@ -16,8 +16,15 @@ const fullName = `${firstname} ${lastName}`;
 console.log(fullName); // "undefined Rivera"
 
 // What's wrong ↓
+//deconstruction and the fullName declaration have a typos
 
 // Your fix ↓
+
+const user = { firstName: "alex", lastName: "Rivera" };
+
+const { firstName, lastName } = user;
+const fullName = `${firstName} ${lastName}`;
+console.log(fullName); // "undefined Rivera"
 
 
 // ----------------------------------------------------------
@@ -39,8 +46,17 @@ console.log(validateUsername("   "));    // ❌ should be invalid — logs "Vali
 console.log(validateUsername("alexdev")); // ✅ valid
 
 // What's wrong ↓
+// "   " is considerd as a string, for user pov it is empty, programming pov it is a string
 
 // Your fix ↓
+
+function validateUsername(username) {
+  let trimmedUsername = username.trim();
+  if (!trimmedUsername) {
+    return "Username is required";
+  }
+  return `Valid: ${trimmedusername}`;
+}
 
 
 // ----------------------------------------------------------
@@ -76,7 +92,22 @@ console.log(validateForm({ username: "al",      email: "a@b.com", age: "28" }));
 // Bug 2: username "al" has length 2. Is 2 > 3?
 
 // Bug 1 ↓
-
+// parseInt(abc) return NaN
 // Bug 2 ↓
-
+// maybe the length should be >= 2? we would still accpet "a a" as a valid name length
 // Your fix ↓
+function validateAge(ageStr) {
+  const age = parseInt(ageStr);
+  return age = NaN ? false : age >= 13 && age <= 120;
+}
+
+function validateForm(data) {
+  const usernameOk = data.username.length >= 2;
+  const emailOk    = data.email.includes("@");
+  const ageOk      = validateAge(data.age);
+
+  if (usernameOk && emailOk && ageOk) {
+    return `Welcome, ${data.username}!`;
+  }
+  return "Form invalid";
+}

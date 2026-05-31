@@ -57,10 +57,26 @@ const testInputs = {
 
 function isValidUsername(username) {
   // your code here
-}
+if (typeof username !== "string") {
+  return ("Username must be a string")
+} else if (username.length < 3) {
+  return (`Username must be at least 3 charachters (got ${username.length})`)
+} else if (username.length > 20) {
+  return (`Username must be 20 charachters or fewer (got ${username.length})`)
+} else if (username.includes(" ")) {
+  return ("Username cannot contain spaces")
+} return {
+  valid: true,
+  message: `${username} is a valid username`}
+};
 
 console.log("--- Task 1: Username Validation ---");
 // your code here
+
+const usernameArray = [testInputs.validUsername, testInputs.shortUsername, testInputs.longUsername, testInputs.spacesUsername];
+for (let i=0; i<4; i++) {
+  console.log(isValidUsername(usernameArray[i]));
+};
 
 // ----------------------------------------------------------
 // TASK 2 — isValidEmail
@@ -86,10 +102,31 @@ console.log("--- Task 1: Username Validation ---");
 
 function isValidEmail(email) {
   // your code here
-}
+const cleanEmail = email.trim().toLowerCase();
+const [userEmail, domainEmail] = cleanEmail.split("@");
+
+if (cleanEmail.includes("@") === false) {
+  return ("The email has to contain: @");
+} else if (userEmail === "" || domainEmail === "") {
+  return ("The email format is invalid: missing user or domain");
+} else if (cleanEmail.indexOf("@") > cleanEmail.lastIndexOf(".")) {
+  return ("The email format is invalid");
+} return {
+    email: cleanEmail,
+    isValid: true,
+    message: "Valid email"
+} 
+};
+
+//const validDomain = domainEmail.includes(".");
 
 console.log("\n--- Task 2: Email Validation ---");
 // your code here
+
+const emailArray = [testInputs.validEmail, testInputs.noAtEmail, testInputs.noDomainEmail];
+for (let i=0; i<3; i++) {
+  console.log(isValidEmail(emailArray[i]));
+};
 
 // ----------------------------------------------------------
 // TASK 3 — isValidAge
@@ -111,10 +148,34 @@ console.log("\n--- Task 2: Email Validation ---");
 
 function isValidAge(ageInput) {
   // your code here
-}
+  const age = Number(ageInput);
+
+  if (isNaN(age)) {
+      return {
+        valid: false,
+        message: `${ageInput}" is not a valid number`}
+    } else if (age < 13) {
+      return {
+        valid: false,
+        message: `Age must be at least 13 (got ${age})`}
+    } else if (age > 120) {
+      return {
+        valid: false,
+        message: `Age must be 120 or below (got ${age})`}
+    } return {
+      valid: true,
+      message: `Valid age: ${age}`
+    }
+  }
 
 console.log("\n--- Task 3: Age Validation ---");
 // your code here
+
+const ageArray = [testInputs.validAge, testInputs.youngAge, testInputs.textage, testInputs.negativeAge];
+for (let i=0; i<4; i++) {
+  console.log(isValidAge(ageArray[i]));
+};
+// Number() return NaN, parseInt() tries to convert the value to the last charachter that could be converted to an integer, 1101 value would be converted to 13.
 
 // ----------------------------------------------------------
 // TASK 4 — isValidPassword
@@ -148,12 +209,37 @@ console.log("\n--- Task 3: Age Validation ---");
 
 function isValidPassword(password) {
   // your code here
-}
+
+  const hasEightChar = password.length >= 8;
+  const hasUpper = password !== password.toLowerCase();
+  const hasNumber = /[0-9]/.test(password);
+  const hasSpecial = /[!@#$%^&*?_\-]/.test(password);
+  
+  const errors = [];
+  if (!hasEightChar) errors.push("at least 8 characters");
+  if (!hasUpper) errors.push("one uppercase letter");
+  if (!hasNumber) errors.push("one number character");
+  if (!hasSpecial) errors.push("one special character");
+  
+  if (errors.length > 0) {
+    return {
+      valid: false,
+      message: `Password needs: ${errors.join(", ")}` }
+     } else {
+      return {
+        valid: true,
+        message: "Password meets all requirements" }
+      }
+    };
 
 console.log("\n--- Task 4: Password Validation ---");
 // your code here
 
-// ----------------------------------------------------------
+const passwordArray = [testInputs.validPassword, testInputs.shortPassword, testInputs.noUpperPassword, testInputs.noNumberPassword, testInputs.noSpecialPassword];
+for (let i=0; i<5; i++) {
+  console.log(isValidPassword(passwordArray[i]));
+};
+  // ----------------------------------------------------------
 // TASK 5 — formatValidationResult
 // ----------------------------------------------------------
 // Declare a function called formatValidationResult.
