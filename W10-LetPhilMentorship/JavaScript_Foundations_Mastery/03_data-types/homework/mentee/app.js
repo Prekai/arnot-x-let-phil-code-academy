@@ -48,23 +48,35 @@ const testInputs = {
 // Use template literals for all messages.
 // Messages:
 //   if not a string: "Username must be a string"
-//   if too short:    `Username must be at least 3 characters (got ${length})`
-//   if too long:     `Username must be 20 characters or fewer (got ${length})`
+//   if too short:    Username must be at least 3 characters (got ${length})
+//   if too long:     Username must be 20 characters or fewer (got ${length})
 //   if has spaces:   "Username cannot contain spaces"
-//   if valid:        `"${username}" is a valid username`
+//   if valid:        "${username}" is a valid username
 //
 // Test with all four username test inputs. Log each result.
 
 function isValidUsername(username) {
   // your code here
 if (typeof username !== "string") {
-  return ("Username must be a string")
+  return {
+    valid: false,
+    message: ("Username must be a string")
+  }
 } else if (username.length < 3) {
-  return (`Username must be at least 3 charachters (got ${username.length})`)
+  return {
+    valid: false,
+    message: (`Username must be at least 3 charachters (got ${username.length})`)
+  }
 } else if (username.length > 20) {
-  return (`Username must be 20 charachters or fewer (got ${username.length})`)
+  return {
+    valid: false,
+    message: (`Username must be 20 charachters or fewer (got ${username.length})`)
+  }
 } else if (username.includes(" ")) {
-  return ("Username cannot contain spaces")
+  return {
+    valid: false,
+    message: ("Username cannot contain spaces")
+  } 
 } return {
   valid: true,
   message: `${username} is a valid username`}
@@ -74,7 +86,7 @@ console.log("--- Task 1: Username Validation ---");
 // your code here
 
 const usernameArray = [testInputs.validUsername, testInputs.shortUsername, testInputs.longUsername, testInputs.spacesUsername];
-for (let i=0; i<4; i++) {
+for (let i=0; i<usernameArray.length; i++) {
   console.log(isValidUsername(usernameArray[i]));
 };
 
@@ -106,17 +118,27 @@ const cleanEmail = email.trim().toLowerCase();
 const [userEmail, domainEmail] = cleanEmail.split("@");
 
 if (cleanEmail.includes("@") === false) {
-  return ("The email has to contain: @");
+  return {
+    valid: false,
+    cleanEmail,
+    message: ("The email has to contain: @")}
 } else if (userEmail === "" || domainEmail === "") {
-  return ("The email format is invalid: missing user or domain");
+  return {
+    valid: false,
+    cleanEmail,
+    message: ("The email format is invalid: missing user or domain")}
 } else if (cleanEmail.indexOf("@") > cleanEmail.lastIndexOf(".")) {
-  return ("The email format is invalid");
+  return {
+    valid: false,
+    cleanEmail,
+    message: ("The email format is invalid")}
 } return {
-    email: cleanEmail,
-    isValid: true,
+    valid: true,
+    cleanEmail,
     message: "Valid email"
 } 
 };
+
 
 //const validDomain = domainEmail.includes(".");
 
@@ -124,7 +146,7 @@ console.log("\n--- Task 2: Email Validation ---");
 // your code here
 
 const emailArray = [testInputs.validEmail, testInputs.noAtEmail, testInputs.noDomainEmail];
-for (let i=0; i<3; i++) {
+for (let i=0; i<emailArray.length; i++) {
   console.log(isValidEmail(emailArray[i]));
 };
 
@@ -136,10 +158,10 @@ for (let i=0; i<3; i++) {
 //
 // Steps:
 //   1. Convert to number: const age = Number(ageInput)
-//   2. If isNaN(age): return { valid: false, message: `"${ageInput}" is not a valid number` }
-//   3. If age < 13:   return { valid: false, message: `Age must be at least 13 (got ${age})` }
-//   4. If age > 120:  return { valid: false, message: `Age must be 120 or below (got ${age})` }
-//   5. Return: { valid: true, age, message: `Valid age: ${age}` }
+//   2. If isNaN(age): return { valid: false, message: "${ageInput}" is not a valid number }
+//   3. If age < 13:   return { valid: false, message: Age must be at least 13 (got ${age}) }
+//   4. If age > 120:  return { valid: false, message: Age must be 120 or below (got ${age}) }
+//   5. Return: { valid: true, age, message: Valid age: ${age} }
 //      (include the converted number in the object)
 //
 // Test with validAge ("28"), youngAge ("12"), textAge ("twenty"), negativeAge ("-5").
@@ -166,13 +188,13 @@ function isValidAge(ageInput) {
       valid: true,
       message: `Valid age: ${age}`
     }
-  }
+  };
 
 console.log("\n--- Task 3: Age Validation ---");
 // your code here
 
 const ageArray = [testInputs.validAge, testInputs.youngAge, testInputs.textage, testInputs.negativeAge];
-for (let i=0; i<4; i++) {
+for (let i=0; i<ageArray.length; i++) {
   console.log(isValidAge(ageArray[i]));
 };
 // Number() return NaN, parseInt() tries to convert the value to the last charachter that could be converted to an integer, 1101 value would be converted to 13.
@@ -196,12 +218,12 @@ for (let i=0; i<4; i++) {
 //
 // Collect all failures into an array:
 //   const errors = [];
-//   if (password.length < 8)  errors.push("at least 8 characters");
+//   if (password.length < 😎  errors.push("at least 8 characters");
 //   if (!hasUpper)            errors.push("one uppercase letter");
 //   etc.
 //
 // If errors.length > 0:
-//   return { valid: false, message: `Password needs: ${errors.join(", ")}` }
+//   return { valid: false, message: Password needs: ${errors.join(", ")} }
 // Else:
 //   return { valid: true, message: "Password meets all requirements" }
 //
@@ -239,7 +261,7 @@ const passwordArray = [testInputs.validPassword, testInputs.shortPassword, testI
 for (let i=0; i<5; i++) {
   console.log(isValidPassword(passwordArray[i]));
 };
-  // ----------------------------------------------------------
+// ----------------------------------------------------------
 // TASK 5 — formatValidationResult
 // ----------------------------------------------------------
 // Declare a function called formatValidationResult.
