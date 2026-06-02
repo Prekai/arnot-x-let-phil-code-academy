@@ -275,10 +275,30 @@ for (let i=0; i<5; i++) {
 
 function formatValidationResult(fieldName, result) {
   // your code here
+  
+console.log(`${result.valid ? "✅" : "❌"} ${fieldName}: ${result.message}`);
 }
+
 
 console.log("\n--- Task 5: Formatted Results ---");
 // Rerun at least 3 tests from each validator through formatValidationResult
+
+formatValidationResult("Username:", isValidUsername(testInputs.validUsername));
+formatValidationResult("Username:", isValidUsername(testInputs.shortUsername));
+formatValidationResult("Username:", isValidUsername(testInputs.longUsername));
+
+formatValidationResult("Email:", isValidEmail(testInputs.validEmail));
+formatValidationResult("Email:", isValidEmail(testInputs.noAtEmail));
+formatValidationResult("Email:", isValidEmail(testInputs.noDomainEmail));
+
+formatValidationResult("Age:", isValidAge(testInputs.validAge));
+formatValidationResult("Age:", isValidAge(testInputs.youngAge));
+formatValidationResult("Age:", isValidAge(testInputs.textAge));
+
+formatValidationResult("Password:", isValidPassword(testInputs.validPassword));
+formatValidationResult("Password:", isValidPassword(testInputs.shortPassword));
+formatValidationResult("Password:", isValidPassword(testInputs.noUpperPassword));
+
 
 // ----------------------------------------------------------
 // TASK 6 — validateSignUpForm
