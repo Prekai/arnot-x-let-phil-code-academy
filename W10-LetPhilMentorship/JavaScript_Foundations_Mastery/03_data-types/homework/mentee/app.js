@@ -336,30 +336,40 @@ formatValidationResult("Password:", isValidPassword(testInputs.noUpperPassword))
 
 function validateSignUpForm(formData) {
   // your code here
-  formatValidationResult("Username:", isValidUsername(formdData.username));
-  formatValidationResult("Email:", isValidEmail(formData.email));
-  formatValidationResult("Age:", isValidAge(fromData.age));
-  formatValidationResult("Password:", isValidPassword(formData.password));
+ const usernameResult = isValidUsername(formData.username);
+ const emailResult = isValidEmail(formData.email);
+ const ageResult = isValidAge(formData.age);
+ const passwordResult = isValidPassword(formData.password);
 
-  
+const results = {
+  username: usernameResult,
+  email: emailResult,
+  age: ageResult,
+  password: passwordResult
+ };
+
+ const formValid = Object.values(results).every(r => r.valid)
+
+ return {valid: formValid, results};
 }
 
-validateSignUpForm({
+console.log("\n--- Task 6: Full Form Validation ---");
+// your code here
+
+console.log(validateSignUpForm({
   username: "alexdev",
   email: "alex@devstudio.com",
   age: "28",
   password: "SecurePass1!"
-})
+}))
 
-validateSignUpForm({
+console.log(validateSignUpForm({
   username: "al",
   email: "not-an-email",
   age: "twelve",
   password: "abc"
-})
+}))
 
-console.log("\n--- Task 6: Full Form Validation ---");
-// your code here
 
 // ----------------------------------------------------------
 // TASK 7 — cleanFormData
