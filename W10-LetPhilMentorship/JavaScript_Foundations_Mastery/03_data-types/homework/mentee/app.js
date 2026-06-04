@@ -258,7 +258,7 @@ console.log("\n--- Task 4: Password Validation ---");
 // your code here
 
 const passwordArray = [testInputs.validPassword, testInputs.shortPassword, testInputs.noUpperPassword, testInputs.noNumberPassword, testInputs.noSpecialPassword];
-for (let i=0; i<5; i++) {
+for (let i=0; i<passwordArray.length; i++) {
   console.log(isValidPassword(passwordArray[i]));
 };
 // ----------------------------------------------------------
@@ -299,7 +299,7 @@ formatValidationResult("Password:", isValidPassword(testInputs.validPassword));
 formatValidationResult("Password:", isValidPassword(testInputs.shortPassword));
 formatValidationResult("Password:", isValidPassword(testInputs.noUpperPassword));
 
-
+// ----------------------------------------------------------
 // ----------------------------------------------------------
 // TASK 6 — validateSignUpForm
 // ----------------------------------------------------------
@@ -336,7 +336,27 @@ formatValidationResult("Password:", isValidPassword(testInputs.noUpperPassword))
 
 function validateSignUpForm(formData) {
   // your code here
+  formatValidationResult("Username:", isValidUsername(formdData.username));
+  formatValidationResult("Email:", isValidEmail(formData.email));
+  formatValidationResult("Age:", isValidAge(fromData.age));
+  formatValidationResult("Password:", isValidPassword(formData.password));
+
+  
 }
+
+validateSignUpForm({
+  username: "alexdev",
+  email: "alex@devstudio.com",
+  age: "28",
+  password: "SecurePass1!"
+})
+
+validateSignUpForm({
+  username: "al",
+  email: "not-an-email",
+  age: "twelve",
+  password: "abc"
+})
 
 console.log("\n--- Task 6: Full Form Validation ---");
 // your code here
