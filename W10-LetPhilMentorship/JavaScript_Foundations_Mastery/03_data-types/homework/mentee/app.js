@@ -336,16 +336,12 @@ formatValidationResult("Password:", isValidPassword(testInputs.noUpperPassword))
 
 function validateSignUpForm(formData) {
   // your code here
- const usernameResult = isValidUsername(formData.username);
- const emailResult = isValidEmail(formData.email);
- const ageResult = isValidAge(formData.age);
- const passwordResult = isValidPassword(formData.password);
 
 const results = {
-  username: usernameResult,
-  email: emailResult,
-  age: ageResult,
-  password: passwordResult
+  username: isValidUsername(formData.username),
+  email: isValidEmail(formData.email),
+  age: isValidAge(formData.age),
+  password: isValidPassword(formData.password)
  };
 
  const formValid = Object.values(results).every(r => r.valid)
@@ -397,10 +393,32 @@ console.log(validateSignUpForm({
 
 function cleanFormData(rawFormData) {
   // your code here
+  
+  return {
+    username: rawFormData.username.trim().toLowerCase(),
+    email: rawFormData.email.trim().toLowerCase(),
+    age: rawFormData.age.trim(),
+    password: rawFormData.password
+  }
 }
+
+const cleanFormDataObject = cleanFormData({
+  username: "  AlexDev  ",
+  email: "  ALEX@DEVSTUDIO.COM  ",
+  age: "  28  ",
+  password: "SecurePass1!"
+})
+
+const fieldName = ["Username", "Email", "Age", "Password"];
+const original = ["  AlexDev  ", "  ALEX@DEVSTUDIO.COM  ", "  28  ", "SecurePass1!"];
+const cleaned = [cleanFormDataObject.username, cleanFormDataObject.email, cleanFormDataObject.age, cleanFormDataObject.password];
 
 console.log("\n--- Task 7: Cleaning Form Data ---");
 // your code here
+
+for (let i = 0; i < 4; i++){
+  console.log(`Cleaned ${fieldName[i]}: "${original[i]}" -> "${cleaned[i]}"`);
+}
 
 // ----------------------------------------------------------
 // TASK 8 — Connect the dots: full pipeline
@@ -417,6 +435,18 @@ console.log("\n--- Task 7: Cleaning Form Data ---");
 
 console.log("\n--- Task 8: Full Pipeline ---");
 // your code here
+
+const rawData = {
+  username: "  AlexDev  ",
+  email: "  ALEX@DEVSTUDIO.COM  ",
+  age: "  28  ",
+  password: "SecurePass1!"
+};
+
+const cleanedValue = cleanFormData(rawData);
+const validation = validateSignUpForm(cleanedValue);
+console.log(cleaned);
+console.log(validation);
 
 // ----------------------------------------------------------
 // ⭐ STRETCH GOAL — formatSummary
@@ -441,7 +471,23 @@ console.log("\n--- Task 8: Full Pipeline ---");
 
 function formatSummary(validationResult) {
   // your code here
+  let fieldLines = "";
+ 
+  Object.entries(validationResult.results).forEach(([field, result]) => {
+  const icon = result.valid ? "✅" : "❌";
+    fieldLines += `${field} ${icon} ${result.message}\n`;
+  });
+
+  return fieldLines;
 }
 
 console.log("\n--- Stretch: formatSummary ---");
 // your code here
+console.log(`=== Sign-Up validation Report ===
+  Overall: ✅ Ready to submit  OR  ❌ Form has errors
+  `)
+console.log(formatSummary(validateSignUpForm({
+  username: "alexdev",
+  email: "alex@devstudio.com",
+  age: "28",
+  password: "SecurePass1!"})));
