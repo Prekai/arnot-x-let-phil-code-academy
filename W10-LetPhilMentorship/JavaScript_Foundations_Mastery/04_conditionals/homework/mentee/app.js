@@ -28,6 +28,14 @@
 //
 // Log: "Student: " + studentName
 
+const studentName = "Arnot";
+let maxScore = 100;
+let passingScore = 60;
+let earnedScore = 73;
+let isExtraCredit = false;
+
+console.log("Student: " + studentName);
+
 // ----------------------------------------------------------
 // TASK 2 — Apply extra credit (operators)
 // ----------------------------------------------------------
@@ -40,12 +48,23 @@
 //
 // Then log the final earnedScore.
 
+const extraCreditPoints = 5;
+
+if (isExtraCredit) {
+    console.log("Extra credit applied! New score: " + earnedScore);
+} else {
+    console.log("No extra credit");
+}
 // ----------------------------------------------------------
 // TASK 3 — Calculate the percentage (operators)
 // ----------------------------------------------------------
 // Declare a const called percentage = (earnedScore / maxScore) * 100
 //
 // Log: studentName + " scored " + percentage + "%"
+
+const percentage = (earnedScore / maxScore) * 100;
+
+console.log(`${studentName} scored ${percentage} %`);
 
 // ----------------------------------------------------------
 // TASK 4 — Assign a letter grade (else if chain)
@@ -60,6 +79,17 @@
 //
 // ⚠️ Think carefully about the order. Why must 90 come before 80?
 
+if (percentage >= 90) {
+    console.log("Grade: A 🌟");
+} else if (percentage >= 80) {
+    console.log("Grade: B ✅");
+} else if (percentage >= 70) {
+    console.log("Grade: C 📘");
+} else if (percentage >= 60){
+    console.log("Grade: D ⚠");
+} else {
+    console.log("Grade: F ❌");
+}
 // ----------------------------------------------------------
 // TASK 5 — Pass or fail (if/else + operators)
 // ----------------------------------------------------------
@@ -67,6 +97,11 @@
 //   IF earnedScore >= passingScore → log studentName + " — PASSED ✅"
 //   ELSE                          → log studentName + " — FAILED ❌"
 
+if (earnedScore >= passingScore) {
+    console.log(`${studentName} _ PASSED ✅`);
+} else {
+    console.log(`${studentName} _ FAILED ❌`);
+}
 // ----------------------------------------------------------
 // TASK 6 — Attendance check (logical operators)
 // ----------------------------------------------------------
@@ -83,6 +118,14 @@
 //   ELSE:
 //     log "🚫 Not eligible. Score: " + earnedScore + " | Attendance: " + attendancePercent + "%"
 
+const attendancePercent = 72;
+const minAttendance = 75;
+
+if (earnedScore >= passingScore && attendancePercent >= minAttendance) {
+    console.log("✅ Eligaible for final grade.");
+} else {
+    console.log(`🚫 Not eligible. Score ${earnedScore} | Attendance: ${attendancePercent} %`);
+}
 // ----------------------------------------------------------
 // TASK 7 — Honor roll check (logical operators + !)
 // ----------------------------------------------------------
