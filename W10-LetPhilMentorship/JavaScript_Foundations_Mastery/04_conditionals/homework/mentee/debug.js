@@ -22,9 +22,16 @@ if (score = passing) {
 }
 
 // What's wrong ↓
-
+// score is assigned and not compared
 // Your fix ↓
 
+if (score === passing) {
+  console.log("Pass ✅");
+} else {
+  console.log("Fail ❌");
+}
+
+// What's wrong ↓
 
 // ----------------------------------------------------------
 // 🟡 DEBUG 2 — Medium
@@ -44,8 +51,14 @@ if (height >= minHeight && withAdult) {
 }
 
 // What's wrong ↓
-
+// the || operator has to be used because one of the statment is true the user should pass
 // Your fix ↓
+
+if (height >= minHeight || withAdult) {
+  console.log("🎢 Enjoy the ride!");
+} else {
+  console.log("🚫 Sorry, you cannot ride.");
+}
 
 
 // ----------------------------------------------------------
@@ -69,7 +82,17 @@ if (orderTotal < 50) {
 }
 
 // Bug 1 ↓
-
+// The execution order is wrong
 // Bug 2 ↓
-
+// the second evaulation should be a range
 // Your fix ↓
+
+if (orderTotal < 50) {
+  console.log("📦 Economy shipping: $9.99");
+}
+if (orderTotal >= 50 && orderTotal < 100) {
+  console.log("🚚 Standard shipping: $5");
+}
+if (orderTotal >= 100) {
+  console.log("🚀 Free express shipping!");
+}

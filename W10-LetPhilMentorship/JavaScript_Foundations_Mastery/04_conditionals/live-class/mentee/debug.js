@@ -79,7 +79,7 @@ if (score >= 90) {
 }
 
 // What's wrong ↓
-// we have to define ranges and not only >= or revert the order evaulate 90, 70 than 50. After the first condition is fulfilled the statment brakes.
+// we have to define ranges and not only >= or revert the order evaulate 90, 70 than 50. 
 // Your fix ↓
 
 

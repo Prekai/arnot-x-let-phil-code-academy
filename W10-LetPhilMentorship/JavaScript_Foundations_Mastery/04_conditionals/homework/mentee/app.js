@@ -124,7 +124,7 @@ const minAttendance = 75;
 if (earnedScore >= passingScore && attendancePercent >= minAttendance) {
     console.log("✅ Eligaible for final grade.");
 } else {
-    console.log(`🚫 Not eligible. Score ${earnedScore} | Attendance: ${attendancePercent} %`);
+    console.log(`🚫 Not eligible. Score ${earnedScore} | Attendance: ${attendancePercent}%`);
 }
 // ----------------------------------------------------------
 // TASK 7 — Honor roll check (logical operators + !)
@@ -142,6 +142,14 @@ if (earnedScore >= passingScore && attendancePercent >= minAttendance) {
 //   ELSE:
 //     log studentName + " did not qualify for Honor Roll."
 
+const honorRollThreshold = 90;
+const hasDisciplinaryNote = false;
+
+if (percentage >= honorRollThreshold && !hasDisciplinaryNote) {
+    console.log(`${studentName} has made the Honor Roll!🏆`);
+} else {
+    console.log(`${studentName} did not qualify for Honor Roll.`);
+}
 // ----------------------------------------------------------
 // TASK 8 — Connect the dots summary
 // ----------------------------------------------------------
@@ -158,6 +166,12 @@ if (earnedScore >= passingScore && attendancePercent >= minAttendance) {
 //    e.g. Math.abs(-7) → 7. We'll cover Math methods in Data Types.
 //    For now just use it as shown above.
 
+const pointsNeededToPass = passingScore - earnedScore;
+
+if (earnedScore >= passingScore){
+    console.log(`${studentName} passed with ${earnedScore} points`);
+} else {
+}   console.log(`${studentName} needs ${Math.abs(pointsNeededToPass)} more points to pass.`);
 // ----------------------------------------------------------
 // ⭐ STRETCH GOAL — Subject breakdown
 // ----------------------------------------------------------
@@ -184,3 +198,19 @@ if (earnedScore >= passingScore && attendancePercent >= minAttendance) {
 //
 // Hint for the || condition:
 //   mathScore < 60 || scienceScore < 60 || englishScore < 60
+
+let mathScore = 88;
+let scienceScore = 74;
+let englishScore = 91;
+
+const totalPoints = mathScore + scienceScore + englishScore;
+const subjectCount = 3;
+const avarage = totalPoints / subjectCount;
+
+console.log(`Avarage score: ${avarage.toFixed(2)}`);
+
+if(mathScore < 60 || scienceScore < 60 || englishScore < 60){
+    console.log("⚠ Warning: at least one subject needs attention.");
+} else {
+    console.log("✅ All subjects are passing");
+}
