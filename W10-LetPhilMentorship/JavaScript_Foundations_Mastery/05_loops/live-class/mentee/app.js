@@ -263,6 +263,39 @@ for (let i = 1; i <= 10; i++) {
 //
 // After the loop, log: "Final total: $" + runningTotal
 
+let runningTotal = 0;
+const budget = 50;
+
+const price1 = 12;
+const price2 = 8;
+const price3 = 25;
+const price4 = 6;
+const price5 = 18;
+
+let currentPrice = 0;
+
+for (let i = 1; i <= 5; i++){
+  if (i === 1) {
+    currentPrice = price1;
+  } else if (i === 2) {
+    currentPrice = price2;
+  } else if (i === 3) {
+    currentPrice = price3;
+  } else if (i === 4) {
+    currentPrice = price4;
+  } else { 
+    currentPrice = price5;
+  }
+
+
+if (runningTotal + currentPrice > budget) {
+  console.log(`️⚠ Skipping item ${i} ($${currentPrice}) over budget`);
+} else {
+  runningTotal += currentPrice;
+  console.log(`✅ Added item ${i} ($${currentPrice}) | Total: $${runningTotal}`);
+}}
+
+console.log(`Final total: $${runningTotal}`);
 // ============================================================
 // 📝 do...while — FOOTNOTE
 // ============================================================

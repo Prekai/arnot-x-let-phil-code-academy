@@ -17,9 +17,12 @@ for (let i = 1; i < 5; i++) {
 }
 
 // What's wrong ↓
-
+// when the i === 5 it is not executed anymore
 // Your fix ↓
 
+for (let i = 1; i <= 5; i++) {
+  console.log(i);
+}
 
 // ----------------------------------------------------------
 // 🟡 DEBUG 2 — Medium
@@ -34,9 +37,14 @@ while (i > 0) {
 }
 
 // What's wrong ↓
-
+// infinte loop
 // Your fix ↓
 
+let i = 3;
+while (i > 0) {
+  console.log(i);
+  i--;
+}
 
 // ----------------------------------------------------------
 // 🔴 DEBUG 3 — Hard
@@ -53,5 +61,10 @@ for (let i = 1; i <= 5; i++) {
 console.log("Done!");
 
 // What's wrong ↓
-
+// the break stop the execution
 // Your fix ↓
+
+for (let i = 1; i <= 5; i++) {
+  console.log(i);
+}
+console.log("Done!");
