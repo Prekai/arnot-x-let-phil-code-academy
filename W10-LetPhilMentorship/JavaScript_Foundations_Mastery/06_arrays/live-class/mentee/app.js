@@ -245,6 +245,19 @@ console.log(playlist);
 // After the loop:
 //   log: "Hot days this week: " + hotDays + " / " + temperatures.length
 
+const temperatures = [22, 35, 18, 41, 29, 15, 37];
+const heatThreshold = 35;
+let hotDays = 0;
+
+for (let i = 0; i < temperatures.length; i++) {
+if (temperatures[i] >= heatThreshold) {
+  hotDays ++;
+  console.log(`🌡️ Day ${i+1}: ${temperatures[i]} °C - HOT`);
+} else {
+  console.log(`✅ Day ${i+1}: ${temperatures[i]} °C - Normal`);
+}
+console.log(`Hot days this week: ${hotDays} / ${temperatures.length}`); }
+
 // TASK 10 — Full connect the dots (all 5 lessons)
 // Declare a const called scores:
 //   [88, 72, 95, 61, 84, 79, 90]
@@ -268,6 +281,38 @@ console.log(playlist);
 //   Log: "Highest:    " + highScore
 //   Log: "Lowest:     " + lowScore
 //   Log: "Failed:     " + failCount + " student(s)"
+
+const scores = [88, 72, 95, 61, 84, 79, 90];
+total = 0;
+let highScore = 0;
+let lowScore = scores[0];
+const passing = 70;
+let failCount = 0;
+
+for (let i = 0; i < scores.length; i++) {
+  total += scores[i];
+  
+  if (scores[i] > highScore) {
+    highScore = scores[i];
+  }
+  
+  if ( scores[i] < lowScore) {
+    lowScore = scores[i];
+  }
+  
+  if (scores[i] < passing){ 
+    failCount++;
+  }
+  
+  const average = total / scores.length;
+  console.log(
+    `Scores: ${scores}
+    Average: ${average.toFixed(2)}
+    Highest: ${highScore}
+    Lowest: ${lowScore}
+    Failed: ${failCount} student(s)`
+  )
+}
 
 // ============================================================
 // 📝 for...of — FOOTNOTE
