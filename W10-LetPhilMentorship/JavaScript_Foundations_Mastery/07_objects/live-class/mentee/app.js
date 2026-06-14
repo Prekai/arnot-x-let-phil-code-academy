@@ -355,3 +355,29 @@ for (let i = 0; i < contacts.length; i++) {
 // After the loop:
 //   Log: "Total salary budget: $" + totalSalary
 //   Log: "Full-time: " + fullTimeCount + " | Part-time: " + partTimeCount
+
+const employees = [
+  {name: "Clara", department: "Engineering", salary: 40000, isFullTime: true},
+  {name: "Fred", department: "Design", salary: 60000, isFullTime: false},
+  {name: "Gabe", department: "Marketing", salary: 80000, isFullTime: true},
+  {name: "Sara", department: "Sales", salary: 120000, isFullTime: true}
+]
+
+let totalSalary = 0;
+let fullTimeCount = 0;
+let partTimeCount = 0;
+
+for (let i = 0; i < employees.length; i++) {
+  totalSalary += employees[i].salary;
+
+  if (employees[i].isFullTime) {
+    fullTimeCount++
+  } else {
+    partTimeCount++
+  };
+
+  console.log(`${employees[i].name} (${employees[i].department}) - $${employees[i].salary} ${employees[i].isFullTime ? "[Full-time]" : "[Part-time]"}`);
+}
+
+console.log(`Total salary budget: $${totalSalary}
+Full-time: ${fullTimeCount} | Part-time: ${partTimeCount}`);

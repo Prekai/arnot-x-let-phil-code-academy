@@ -20,9 +20,10 @@ const user = {
 console.log(user.Email);
 
 // What's wrong ↓
-
+// typo
 // Your fix ↓
 
+console.log(user.email);
 
 // ----------------------------------------------------------
 // 🟡 DEBUG 2 — Medium
@@ -40,9 +41,10 @@ const key = "price";
 console.log(product.key);
 
 // What's wrong ↓
-
+// . notation search for "key"
 // Your fix ↓
 
+console.log(product[key]);
 
 // ----------------------------------------------------------
 // 🔴 DEBUG 3 — Hard
@@ -62,5 +64,9 @@ for (let value of person) {
 }
 
 // What's wrong ↓
-
+// plain object are not iterable
 // Your fix ↓
+
+for (let value in person) {
+  console.log(person[value]);
+}

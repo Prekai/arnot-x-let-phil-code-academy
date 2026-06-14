@@ -12,9 +12,9 @@
 // This should log the middle element ("C") of the array.
 // Instead it logs undefined. What's wrong?
 
-//const letters = ["A", "B", "C", "D", "E"];
-//const middleIndex = letters.length / 2;
-//console.log(letters[middleIndex]);
+const letters = ["A", "B", "C", "D", "E"];
+const middleIndex = letters.length / 2;
+console.log(letters[middleIndex]);
 
 // What's wrong ↓
 // double or float number is not accaptable as index
@@ -30,14 +30,14 @@ console.log(letters[Math.round(middleIndex)]);
 // This loop should build a total of all prices.
 // It logs NaN instead of a number. What's wrong?
 
-//const prices = [10, 20, 30, 40];
-//let total = 0;
+const prices = [10, 20, 30, 40];
+let total = 0;
 
-//for (let i = 0; i <= prices.length; i++) {
-//  total += prices[i];
-//}
+for (let i = 0; i <= prices.length; i++) {
+  total += prices[i];
+}
 
-//console.log("Total: $" + total);
+console.log("Total: $" + total);
 
 // What's wrong ↓
 // The = makes the condition overflow
@@ -58,9 +58,9 @@ for (let i = 0; i < prices.length; i++) {
 // There are TWO bugs. Find both.
 
 const names  = ["Alice", "Bob", "Carol", "Dave"];
-const scores = [82, 91, 78, 77];
+const scores = [82, 91, 78, 95];
 
-let topIndex  = 0;
+let topIndex  = 1;
 let topScore  = 0;
 
 for (let i = 0; i < scores.length; i++) {
@@ -73,7 +73,8 @@ for (let i = 0; i < scores.length; i++) {
 console.log("Winner: " + names[topIndex] + " with " + topScore);
 
 // Bug 1 ↓
-// Top index has to start from 0
+// For clarity maybe topIndex could be initialized to 0, but it doesn't matter becuase the loop we assign new value to it
 // Bug 2 ↓
 // 
 // Your fix ↓
+// no clue the code seems fine for me
