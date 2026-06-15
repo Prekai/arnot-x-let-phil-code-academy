@@ -361,7 +361,7 @@ const employees = [
   {name: "Fred", department: "Design", salary: 60000, isFullTime: false},
   {name: "Gabe", department: "Marketing", salary: 80000, isFullTime: true},
   {name: "Sara", department: "Sales", salary: 120000, isFullTime: true}
-]
+];
 
 let totalSalary = 0;
 let fullTimeCount = 0;

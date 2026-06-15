@@ -21,9 +21,10 @@ const product = {
 console.log(product.Category);
 
 // What's wrong ↓
-
+// typo
 // Your fix ↓
 
+console.log(product.category);
 
 // ----------------------------------------------------------
 // 🟡 DEBUG 2 — Medium
@@ -42,9 +43,12 @@ for (let i = 0; i < inventory.length; i++) {
 }
 
 // What's wrong ↓
-
+// typo
 // Your fix ↓
 
+for (let i = 0; i < inventory.length; i++) {
+  console.log(inventory[i].Name + " — $" + inventory[i].Price);
+}
 
 // ----------------------------------------------------------
 // 🔴 DEBUG 3 — Hard
@@ -67,7 +71,13 @@ for (let i = 0; i <= products.length; i++) {
 console.log("Total value: $" + totalValue);
 
 // Bug 1 ↓
-
+// condition is wrong
 // Bug 2 ↓
-
+// missing index
 // Your fix ↓
+
+for (let i = 0; i < products.length; i++) {
+  totalValue += products[i].price * products[i].stock;
+}
+
+console.log("Total value: $" + totalValue);
