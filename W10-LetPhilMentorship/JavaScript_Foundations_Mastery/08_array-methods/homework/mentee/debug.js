@@ -22,9 +22,14 @@ const withTax = prices.map(function(price) {
 console.log("With tax:", withTax);
 
 // What's wrong ↓
-
+// missing return keyword
 // Your fix ↓
 
+
+const withTax = prices.map(function(price) {
+  const taxed = price * 1.10;
+  return console.log(taxed);
+});
 
 // ----------------------------------------------------------
 // 🟡 DEBUG 2 — Medium
@@ -46,9 +51,13 @@ const pending = orders.filter(function(order) {
 console.log(pending);
 
 // What's wrong ↓
-
+// assign sign used
 // Your fix ↓
 
+
+const pending = orders.filter(function(order) {
+  return order.status === "pending";
+});
 
 // ----------------------------------------------------------
 // 🔴 DEBUG 3 — Hard
@@ -70,9 +79,14 @@ const orderTotal = lineItems.reduce(function(acc, item) {
 console.log("Order total: $" + orderTotal);
 
 // Bug 1 ↓
-
+// The initialisation is missing but I do not see a 2nd bug
 // Bug 2 ↓
 // Hint: run it and read the output carefully.
 // What is the value on the first iteration?
 
 // Your fix ↓
+
+const orderTotal = lineItems.reduce(function(acc, item) {
+  return acc + item.quantity * item.price;
+},0);
+
