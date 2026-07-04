@@ -19,9 +19,15 @@ function renderBoardTitle() {
 renderBoardTitle();
 
 // What's wrong ↓
-
+// the function search for class maybe it is not exist
 // Your fix ↓
 
+function renderBoardTitle() {
+  const titleEl = document.querySelector("board-title");
+  titleEl.textContent = "My Task Board";
+}
+
+renderBoardTitle();
 
 // ----------------------------------------------------------
 // 🟡 DEBUG 2 — Medium
@@ -43,10 +49,21 @@ function renderTasks() {
 renderTasks();
 
 // What's wrong ↓
-
+// list content is assigned again
 // Your fix ↓
 
+function renderTasks() {
+  const list = document.getElementById("list-todo");
+  const tasks = ["Design page", "Write tests", "Fix bug"];
 
+  tasks.forEach(function(taskTitle) {
+    const li = document.createElement("li");
+    li.textContent = taskTitle;
+    list.append(li);
+  });
+}
+
+renderTasks();
 // ----------------------------------------------------------
 // 🔴 DEBUG 3 — Hard
 // ----------------------------------------------------------
@@ -65,7 +82,15 @@ function highlightTasks() {
 highlightTasks();
 
 // Bug 1 ↓
-
+// overflow of the loop, change the condition to <
 // Bug 2 ↓
-
+// no clue I am totally lost at DOM
 // Your fix ↓
+
+function highlightTasks() {
+  const highCards = document.querySelectorAll(".priority-high");
+
+  for (let i = 0; i < highCards.length; i++) {
+    highCards[i].classList.add("highlighted");
+  }
+}

@@ -92,8 +92,15 @@ const boardName = "Sprint 12 — Task Board";
 // Call renderHeader(tasks) at the bottom.
 
 function renderHeader(taskList) {
-  // your code here
+  const boardTitleElement = document.querySelector("#board-title");
+  const taskCountElement = document.querySelector("#task-count");
+
+  boardTitleElement.textContent = boardName;
+  taskCountElement.textContent = taskList.length + " tasks";
+
 }
+
+//renderHeader(tasks);
 
 // ----------------------------------------------------------
 // TASK 2 — createTaskCard  (returns a DOM element)
@@ -125,7 +132,33 @@ function renderHeader(taskList) {
 // Task 3 will handle placing it in the right column.
 
 function createTaskCard(task) {
-  // your code here
+  const taskList = document.createElement("li");
+  const taskParagraph = document.createElement("p");
+  const taskDivision = document.createElement("div");
+
+  taskList.classList.add("task-card");
+  taskList.dataset.id = task.id;
+  taskParagraph.classList.add("task-title");
+  taskDivision.classList.add("task-meta");
+ 
+  taskParagraph.textContent = task.title;
+  
+  const prioritySpan = document.createElement("span");
+  const assigneeSpan = document.createElement("span");
+
+  prioritySpan.textContent = task.priority.toUpperCase();
+  prioritySpan.classList.add(`priority-${task.priority}`);
+
+  assigneeSpan.textContent = `👤 ${task.assignee}`
+
+  taskDivision.append(prioritySpan, assigneeSpan);
+  taskList.append(taskParagraph, taskDivision);
+
+  if (task.status === "done") {
+    taskList.classList.add("completed");
+  }
+
+  return taskList;
 }
 
 // ----------------------------------------------------------
@@ -148,8 +181,25 @@ function createTaskCard(task) {
 // Call renderBoard(tasks) at the bottom.
 
 function renderBoard(taskList) {
-  // your code here
+
+  const listToDo = document.getElementById("list-todo");
+  const listInProgress = document.getElementById("list-inprogress");
+  const listDone = document.getElementById("list-done");
+
+  taskList.forEach(task => {
+    const taskCard = createTaskCard(task)
+
+  if (task.status === "todo") {
+    listToDo.append(taskCard);
+  } else if (task.status === "inprogress") {
+    listInProgress.append(taskCard);
+  } else {
+    listDone.append(taskCard);
+  }
+})
 }
+
+//renderBoard(tasks);
 
 // ----------------------------------------------------------
 // TASK 4 — updateCounts
@@ -169,8 +219,17 @@ function renderBoard(taskList) {
 // Call updateCounts(tasks) at the bottom.
 
 function updateCounts(taskList) {
-  // your code here
+  const completedTask = taskList.filter(task => task.status === "done");
+  const pendingTask = taskList.filter(task => task.status !== "done");
+
+  const completedCount = document.getElementById("completed-count");
+  const pendingCount = document.getElementById("pending-count");
+
+  completedCount.textContent = `✅ ${completedTask.length} done`;
+  pendingCount.textContent = `⏳ ${pendingTask.length} pending`;
 }
+
+//updateCounts(tasks);
 
 // ----------------------------------------------------------
 // TASK 5 — addRemoveButtons
@@ -190,8 +249,15 @@ function updateCounts(taskList) {
 // For now just build and attach the buttons so they appear.
 
 function addRemoveButtons() {
-  // your code here
-}
+  const allTaskCard = document.querySelectorAll(".task-card");
+  
+  allTaskCard.forEach(card => {
+    const button = document.createElement("button");
+    button.classList.add("remove-btn");
+    button.textContent = "x";
+    
+    card.append(button)}
+  );}
 
 // ----------------------------------------------------------
 // TASK 6 — highlightHighPriority
@@ -208,8 +274,14 @@ function addRemoveButtons() {
 // This makes high-priority labels appear bolder.
 
 function highlightHighPriority() {
-  // your code here
+  const priorityHigh = document.querySelectorAll(".priority-high");
+
+  priorityHigh.forEach(element => {
+   element.style.fontWeight = "800";
+  })
 }
+
+//highlightHighPriority();
 
 // ----------------------------------------------------------
 // TASK 7 — addNewTask  (createElement full workflow)
@@ -229,8 +301,33 @@ function highlightHighPriority() {
 // Watch a new card appear in the To Do column.
 
 function addNewTask(title, assignee, priority = "medium", status = "todo") {
-  // your code here
-}
+
+  let newTask = {
+    id: Date.now(),
+    title,
+    assignee,
+    priority,
+    status
+  };
+
+  tasks.push(newTask);
+  const taskElement = createTaskCard(newTask);
+
+  if (status === "todo") {
+    const todoList = document.getElementById("list-todo");
+    todoList.append(taskElement);
+  } else if (status === "inprogress") {
+    const inProgressList = document.getElementById("list-inprogress");
+    inProgressList.append(taskElement);
+  } else if (status === "done") {
+    const doneList = document.getElementById("list-done");
+    doneList.append(taskElement);
+  };
+  
+  updateCounts(tasks);
+};
+
+ // addNewTask("Write unit tests", "Carlos", "high");
 
 // ----------------------------------------------------------
 // TASK 8 — Connect the dots: renderAll
@@ -249,8 +346,14 @@ function addNewTask(title, assignee, priority = "medium", status = "todo") {
 // each function individually.
 
 function renderAll() {
-  // your code here
+  renderHeader(tasks);
+  renderBoard(tasks);
+  updateCounts(tasks);
+  addRemoveButtons();
+  highlightHighPriority();
 }
+
+renderAll();
 
 // ----------------------------------------------------------
 // ⭐ STRETCH GOAL — markComplete
@@ -275,6 +378,29 @@ function renderAll() {
 //
 // Write a comment: what is dataset used for?
 
+//function markComplete (taskId){
+// const foundId = tasks.find(taskObjectId =>taskObjectId.id === taskId);
+//}
+function markComplete(taskId) {
+  const foundTask = tasks.find(task => task.id === taskId);
+
+  const taskCard = document.querySelector(`[data-id='${taskId}']`);
+
+  if (foundTask) {
+    foundTask.status = "done";
+  }
+
+  if (taskCard) {
+    const doneList = document.getElementById("list-done");
+
+    taskCard.classList.add("completed");
+    doneList.appendChild(taskCard);
+  }
+
+  updateCounts(tasks);
+}
+
 // ============================================================
 // CALL YOUR FUNCTIONS HERE
+markComplete(1);
 // ============================================================
