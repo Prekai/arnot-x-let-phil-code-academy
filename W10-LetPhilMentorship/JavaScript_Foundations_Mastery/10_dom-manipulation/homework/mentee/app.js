@@ -92,16 +92,15 @@ const boardName = "Sprint 12 — Task Board";
 // Call renderHeader(tasks) at the bottom.
 
 function renderHeader(taskList) {
-  const boardTitleElement = document.querySelector("#board-title");
-  const taskCountElement = document.querySelector("#task-count");
+  const boardTitle = document.getElementById("board-title");
+  boardTitle.textContent = boardName;
 
-  boardTitleElement.textContent = boardName;
-  taskCountElement.textContent = taskList.length + " tasks";
-
+  const taskCount = document.getElementById("task-count");
+  taskCount.textContent = taskList.length + " tasks";
 }
 
 //renderHeader(tasks);
-
+renderHeader(tasks);
 // ----------------------------------------------------------
 // TASK 2 — createTaskCard  (returns a DOM element)
 // ----------------------------------------------------------
@@ -132,33 +131,32 @@ function renderHeader(taskList) {
 // Task 3 will handle placing it in the right column.
 
 function createTaskCard(task) {
-  const taskList = document.createElement("li");
-  const taskParagraph = document.createElement("p");
-  const taskDivision = document.createElement("div");
-
-  taskList.classList.add("task-card");
-  taskList.dataset.id = task.id;
-  taskParagraph.classList.add("task-title");
-  taskDivision.classList.add("task-meta");
- 
-  taskParagraph.textContent = task.title;
+  const taskCard = document.createElement("li");
+  taskCard.classList.add("task-card");
+  taskCard.dataset.id = task.id;
   
+  const taskTitle = document.createElement("p");
+  taskTitle.classList.add("task-title");
+  taskTitle.textContent = task.title;
+
+  const taskMeta = document.createElement("div");
+  taskMeta.classList.add("task-meta");
+
   const prioritySpan = document.createElement("span");
-  const assigneeSpan = document.createElement("span");
-
   prioritySpan.textContent = task.priority.toUpperCase();
-  prioritySpan.classList.add(`priority-${task.priority}`);
+  prioritySpan.classList.add("priority-" + task.priority);
 
-  assigneeSpan.textContent = `👤 ${task.assignee}`
+  const assigneeSpan = document.createElement("span");
+  assigneeSpan.textContent = "👤 " + task.assignee;
 
-  taskDivision.append(prioritySpan, assigneeSpan);
-  taskList.append(taskParagraph, taskDivision);
+  taskMeta.append(prioritySpan, assigneeSpan);
+  taskCard.append(taskTitle, taskMeta);
 
   if (task.status === "done") {
-    taskList.classList.add("completed");
+    taskCard.classList.add("completed");
   }
 
-  return taskList;
+  return taskCard;
 }
 
 // ----------------------------------------------------------
@@ -181,26 +179,25 @@ function createTaskCard(task) {
 // Call renderBoard(tasks) at the bottom.
 
 function renderBoard(taskList) {
-
   const listToDo = document.getElementById("list-todo");
   const listInProgress = document.getElementById("list-inprogress");
   const listDone = document.getElementById("list-done");
 
   taskList.forEach(task => {
-    const taskCard = createTaskCard(task)
-
-  if (task.status === "todo") {
-    listToDo.append(taskCard);
-  } else if (task.status === "inprogress") {
-    listInProgress.append(taskCard);
-  } else {
-    listDone.append(taskCard);
+      const cardToRender = createTaskCard(task)
+      
+      if (task.status === "todo") {
+        listToDo.append(cardToRender);
+      } else if (task.status === "inprogress") {
+        listInProgress.append(cardToRender);
+      } else {
+        listDone.append(cardToRender);
+      }
+    });
   }
-})
-}
 
 //renderBoard(tasks);
-
+//renderBoard(tasks);
 // ----------------------------------------------------------
 // TASK 4 — updateCounts
 // ----------------------------------------------------------
@@ -219,18 +216,18 @@ function renderBoard(taskList) {
 // Call updateCounts(tasks) at the bottom.
 
 function updateCounts(taskList) {
-  const completedTask = taskList.filter(task => task.status === "done");
-  const pendingTask = taskList.filter(task => task.status !== "done");
+  const completedTasks = taskList.filter(task => task.status === "done");
+  const pendingTasks = taskList.filter(task => task.status !== "done");
 
   const completedCount = document.getElementById("completed-count");
-  const pendingCount = document.getElementById("pending-count");
+  completedCount.textContent = "✅ " + completedTasks.length + " done";
 
-  completedCount.textContent = `✅ ${completedTask.length} done`;
-  pendingCount.textContent = `⏳ ${pendingTask.length} pending`;
+  const pendingCount = document.getElementById("pending-count");
+  pendingCount.textContent = "⏳ " + pendingTasks.length + " pending";
 }
 
 //updateCounts(tasks);
-
+updateCounts(tasks);
 // ----------------------------------------------------------
 // TASK 5 — addRemoveButtons
 // ----------------------------------------------------------
@@ -249,15 +246,15 @@ function updateCounts(taskList) {
 // For now just build and attach the buttons so they appear.
 
 function addRemoveButtons() {
-  const allTaskCard = document.querySelectorAll(".task-card");
-  
-  allTaskCard.forEach(card => {
-    const button = document.createElement("button");
-    button.classList.add("remove-btn");
-    button.textContent = "x";
-    
-    card.append(button)}
-  );}
+  const taskCard = document.querySelectorAll(".task-card");
+
+  taskCard.forEach(task => {
+    const createButton = document.createElement("button");
+    createButton.classList.add("remove-btn");
+    createButton.textContent = "✕";
+    task.append(createButton);
+  });
+}
 
 // ----------------------------------------------------------
 // TASK 6 — highlightHighPriority
@@ -276,13 +273,13 @@ function addRemoveButtons() {
 function highlightHighPriority() {
   const priorityHigh = document.querySelectorAll(".priority-high");
 
-  priorityHigh.forEach(element => {
-   element.style.fontWeight = "800";
+  priorityHigh.forEach(task => {
+    task.style.fontWeight= "800";
   })
 }
 
 //highlightHighPriority();
-
+highlightHighPriority();
 // ----------------------------------------------------------
 // TASK 7 — addNewTask  (createElement full workflow)
 // ----------------------------------------------------------
@@ -302,33 +299,35 @@ function highlightHighPriority() {
 
 function addNewTask(title, assignee, priority = "medium", status = "todo") {
 
-  let newTask = {
-    id: Date.now(),
-    title,
-    assignee,
-    priority,
-    status
-  };
+const newTask = {
+  id: Date.now(),
+  title,
+  assignee,
+  priority,
+  status
+}
 
-  tasks.push(newTask);
-  const taskElement = createTaskCard(newTask);
+ tasks.push(newTask);
+ const newTaskCard = createTaskCard(newTask);
 
-  if (status === "todo") {
-    const todoList = document.getElementById("list-todo");
-    todoList.append(taskElement);
-  } else if (status === "inprogress") {
-    const inProgressList = document.getElementById("list-inprogress");
-    inProgressList.append(taskElement);
-  } else if (status === "done") {
-    const doneList = document.getElementById("list-done");
-    doneList.append(taskElement);
-  };
-  
-  updateCounts(tasks);
+const listToDo = document.getElementById("list-todo");
+const listInProgress = document.getElementById("list-inprogress");
+const listDone = document.getElementById("list-done");
+
+ if (newTask.status === "todo") {
+  listToDo.append(newTaskCard)
+ } else if (newTask.status === "inprogress") {
+  listInProgress.append(newTaskCard)
+} else {
+  listDone.append(newTaskCard)
+};
+
+updateCounts(tasks);
+
 };
 
  // addNewTask("Write unit tests", "Carlos", "high");
-
+addNewTask("Write unit tests", "Carlos", "high");
 // ----------------------------------------------------------
 // TASK 8 — Connect the dots: renderAll
 // ----------------------------------------------------------
@@ -369,7 +368,7 @@ renderAll();
 //      (This uses a data attribute — add data-id to your createTaskCard
 //       function: li.dataset.id = task.id)
 //   4. If the card element exists:
-//      - Add class "completed" using classList
+//      - Add class "completed" using classtist
 //      - Move it to #list-done using appendChild
 //   5. Call updateCounts(tasks) to refresh the stats
 //
@@ -378,24 +377,21 @@ renderAll();
 //
 // Write a comment: what is dataset used for?
 
-//function markComplete (taskId){
-// const foundId = tasks.find(taskObjectId =>taskObjectId.id === taskId);
-//}
 function markComplete(taskId) {
-  const foundTask = tasks.find(task => task.id === taskId);
+  const found = tasks.find(task => task.id === taskId);
 
-  const taskCard = document.querySelector(`[data-id='${taskId}']`);
-
-  if (foundTask) {
-    foundTask.status = "done";
+  if (found) {
+    found.status = "done";
   }
 
-  if (taskCard) {
-    const doneList = document.getElementById("list-done");
+  const taskCardElement = document.querySelector("[data-id='" + taskId + "']");
+  
+  if (taskCardElement) {
+   taskCardElement.classList.add("completed");
 
-    taskCard.classList.add("completed");
-    doneList.appendChild(taskCard);
-  }
+  const listDone = document.getElementById("list-done");
+  listDone.appendChild(taskCardElement)
+  };
 
   updateCounts(tasks);
 }

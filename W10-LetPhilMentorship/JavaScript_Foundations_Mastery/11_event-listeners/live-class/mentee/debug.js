@@ -21,8 +21,15 @@ document.getElementById("theme-btn")
   .addEventListener("click", toggleDark());
 
 // What's wrong ↓
-
+// the callback do an instant execution
 // Your fix ↓
+
+function toggleDark() {
+  document.body.classList.toggle("dark");
+}
+
+document.getElementById("theme-btn")
+  .addEventListener("click", toggleDark);
 
 
 // ----------------------------------------------------------
@@ -48,8 +55,24 @@ document.getElementById("add-skill-form")
   .addEventListener("submit", handleSubmit);
 
 // What's wrong ↓
-
+// after submit the webbrowser refresh, we have to block the event
 // Your fix ↓
+
+function handleSubmit(event) {
+  event.preventDefault();
+  const skillInput = document.getElementById("skill-input");
+  const skillName  = skillInput.value.trim();
+
+  if (skillName) {
+    const li = document.createElement("li");
+    li.textContent = skillName;
+    document.getElementById("skills-list").appendChild(li);
+    skillInput.value = "";
+  }
+}
+
+document.getElementById("add-skill-form")
+  .addEventListener("submit", handleSubmit);
 
 
 // ----------------------------------------------------------
@@ -69,7 +92,17 @@ document.getElementById("skills-list")
   .addEventListener("click", handleSkillClick);
 
 // Bug 1 ↓
-
+// the currentTarget should be just target
 // Bug 2 ↓
 
 // Your fix ↓
+
+function handleSkillClick(event) {
+  if (event.target.tagName === "LI") {
+    event.target.remove();
+  }
+}
+
+document.getElementById("skills-list")
+  .addEventListener("click", handleSkillClick);
+
