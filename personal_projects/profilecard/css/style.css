@@ -1,0 +1,215 @@
+body{
+    margin: 0;
+    padding: 0 5px;
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 16px;
+}
+
+#site-title-button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+}
+
+main {
+    background-color: white;
+    max-width: 350px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#public-view {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#profile-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+#profile-picture, #profile-picture-preview {
+    width: clamp(60px, 30vw, 150px);
+    height: clamp(60px, 30vw, 150px);
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#link-card-section {
+    text-align: center;
+}
+
+#link-card-list {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.link-card-button {
+    border-radius: 10px;
+    border: none;
+    box-shadow: 5px 5px 5px hsl(0, 0%, 85%);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.link-card-button:hover {
+    box-shadow: 5px 5px 5px hsl(0, 0%, 70%);
+}
+ 
+.link-card-button:active {
+    box-shadow: 3px 3px 3px hsl(0, 0%, 70%);
+    transform: translate(2px, 2px);
+}
+
+.link-card-button img {
+    width: clamp(60px, 20vw, 120px);
+    height: clamp(60px, 20vw, 120px);
+}
+
+.link-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  margin: 0 auto;
+}
+
+footer {
+    max-width: 350px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    margin-top: 48px;
+    margin-bottom: 16px;
+}
+
+footer p {
+    margin: 5px;
+}
+
+#profile-form, #card-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    padding-inline: min(5em, 8%);
+    gap: 16px;
+}
+
+#profile-picture-preview {
+    align-self: center;
+}
+
+#admin-view {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#admin-view h2 {
+    text-align: center;
+}
+
+#about-me-counter {
+    text-align: right;
+}
+
+h1 {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+}
+
+h2 {
+    font-size: clamp(1.50rem, 5vw, 1.75rem);
+}
+
+input, select, textarea, button {
+    font: inherit;
+}
+
+#admin-view label {
+  font-size: clamp(1rem, 3vw, 1.25rem);
+}
+
+#admin-view input:not([type="radio"]), #admin-view select, #admin-view textarea, #admin-view button {
+    padding: 8px;
+}
+
+#public-view, #profile-editor, #card-editor {
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px hsl(0, 0%, 85%);
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#admin-view input[type="text"], #admin-view input[type="url"], #admin-view select, #admin-view textarea {
+    border: 2px solid medium hsl(0, 0%, 50%);
+    border-radius: 5px;
+}
+
+#qr-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: white;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 16px;
+    padding: 16px;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#qr-code {
+    width: min(80vw, 320px);
+    max-height: min(80vh, 320px);
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px hsl(0, 0%, 85%);
+    box-sizing: border-box;
+}
+
+#qr-status {
+    margin: 0;
+}

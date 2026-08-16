@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="default user profile icon">
+  <g fill="none" stroke="#000000" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="76" y="76" width="360" height="360" rx="52" ry="52"/>
+    <circle cx="256" cy="196" r="56"/>
+    <path d="M 166 336 C 166 286 206 258 256 258 C 306 258 346 286 346 336"/>
+  </g>
+</svg>
